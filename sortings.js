@@ -7,10 +7,11 @@ function checkTimeDifference(sorting, array, ...params) {
         const endTime = performance.now();
         total += (endTime - startTime);
     }
-    return (`Time gap - ${(total / runs).toFixed(3)} ms from ${runs} tests`);
+    return (`Time gap - ${(total / runs).toFixed(3)} ms an average from ${runs} tests`);
 }
 
-const array = Array.from({length: 10000}, () => Math.floor(Math.random() * 100000));
+const array = Array.from({length: 100000}, () => Math.floor(Math.random() * 100000));
+console.log(`For an array with length of ${array.length}: Counting... `);
 
 //bubble sort
 function bubbleSort(array) {
@@ -153,6 +154,15 @@ console.log("Heap: ", checkTimeDifference(heapSort, array));
 
 //radix sort
 function radixSort(array) {
-    
+    const maxDischarge = Math.max(...array).toString().length;
+    for (let i = 0; i < maxDischarge; i++) {
+        const intermediateArr = Array.from({length: 10}, () => []);
+        array.forEach((item) => {
+            let discharge = Math.floor(item / Math.pow(10, i)) % 10;
+            intermediateArr[discharge].push(item);
+        });
+        array = intermediateArr.flat();
+    }
+    return array;
 }
 console.log("Radix: ", checkTimeDifference(radixSort, array));
