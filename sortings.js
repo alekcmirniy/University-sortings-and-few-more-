@@ -10,7 +10,7 @@ function checkTimeDifference(sorting, array, ...params) {
     return (`Time gap - ${(total / runs).toFixed(3)} ms an average from ${runs} tests`);
 }
 
-const array = Array.from({length: 100000}, () => Math.floor(Math.random() * 100000));
+const array = Array.from({length: 10000}, () => Math.floor(Math.random() * 100000));
 console.log(`For an array with length of ${array.length}: Counting... `);
 
 //bubble sort
